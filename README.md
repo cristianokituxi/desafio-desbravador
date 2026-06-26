@@ -1143,18 +1143,6 @@ Este projeto foi desenvolvido como demonstração de domínio técnico em engenh
 
 Este projeto está licenciado sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
----
-
-## 👤 Autor
-
-|               |                                                                  |
-| ------------- | ---------------------------------------------------------------- |
-| **Nome**      | [Seu Nome](https://github.com/username)                          |
-| **LinkedIn**  | [linkedin.com/in/seu-perfil](https://linkedin.com/in/seu-perfil) |
-| **Portfólio** | [seusite.com](https://seusite.com)                               |
-| **E-mail**    | [seu@email.com](mailto:seu@email.com)                            |
-
----
 
 <p align="center">
   <sub>Desenvolvido com intencionalidade. Cada linha de código tem um motivo.</sub>
