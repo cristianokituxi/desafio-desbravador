@@ -85,11 +85,6 @@
 
 ## 🎬 Demonstração
 
-<p align="center">
-  <em>Adicione um GIF ou screenshot da aplicação aqui</em><br/>
-  <img src="screenshots/home.png" alt="Tela principal do GitHub Explorer" width="800" />
-</p>
-
 > **🔗 Links:** [Repositório](https://github.com/cristianokituxi/desafio-desbravador) · [Demo ao vivo](https://cristianokituxi.github.io/desafio-desbravador/)
 
 ---
