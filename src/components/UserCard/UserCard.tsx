@@ -20,10 +20,7 @@ export const UserCard = memo(function UserCard({
 
   const handleToggleFavorite = useCallback(() => {
     onToggleFavorite?.(user);
-    addToast(
-      isFavorite ? 'Removido dos favoritos' : 'Adicionado aos favoritos!',
-      'success',
-    );
+    addToast(isFavorite ? 'Removido dos favoritos' : 'Adicionado aos favoritos!', 'success');
   }, [onToggleFavorite, user, isFavorite, addToast]);
 
   const handleShare = useCallback(async () => {

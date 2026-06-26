@@ -9,9 +9,7 @@ interface RepositoryCardProps {
   repository: GitHubRepository;
 }
 
-export const RepositoryCard = memo(function RepositoryCard({
-  repository,
-}: RepositoryCardProps) {
+export const RepositoryCard = memo(function RepositoryCard({ repository }: RepositoryCardProps) {
   const { addToast } = useToast();
 
   const handleCopyLink = useCallback(async () => {
