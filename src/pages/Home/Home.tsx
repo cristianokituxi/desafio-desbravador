@@ -7,6 +7,7 @@ import { sortRepositories } from '../../utils/formatters';
 import { SORT_OPTIONS, LAST_SEARCHED_USER_KEY } from '../../utils/constants';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { UserCard } from '../../components/UserCard/UserCard';
+import { UserStats } from '../../components/UserStats/UserStats';
 import { RepositoryCard } from '../../components/RepositoryCard/RepositoryCard';
 import { Loading } from '../../components/Loading/Loading';
 import { Pagination } from '../../components/Pagination/Pagination';
@@ -125,6 +126,8 @@ export function Home() {
             >
               <UserCard user={user} />
             </motion.div>
+
+            <UserStats repositories={repositories} />
 
             <div className={styles.reposHeader}>
               <h2 className={styles.reposTitle}>📦 Repositórios ({repositories.length})</h2>
