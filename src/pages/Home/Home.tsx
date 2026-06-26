@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import type { SortOption } from '../../types';
 import { useGithub } from '../../hooks/useGithub';
-import { useLocalStorage } from '../../hooks/useDebounce';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { sortRepositories } from '../../utils/formatters';
 import { SORT_OPTIONS, LAST_SEARCHED_USER_KEY } from '../../utils/constants';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
