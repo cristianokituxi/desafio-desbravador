@@ -2,6 +2,7 @@ import { memo, useCallback } from 'react';
 import type { GitHubUser } from '../../types';
 import { formatNumber } from '../../utils/formatters';
 import { Avatar } from '../Avatar/Avatar';
+import { useToast } from '../../context/ToastContext';
 import styles from './UserCard.module.scss';
 
 interface UserCardProps {
@@ -15,9 +16,15 @@ export const UserCard = memo(function UserCard({
   isFavorite = false,
   onToggleFavorite,
 }: UserCardProps) {
+  const { addToast } = useToast();
+
   const handleToggleFavorite = useCallback(() => {
     onToggleFavorite?.(user);
-  }, [onToggleFavorite, user]);
+    addToast(
+      isFavorite ? 'Removido dos favoritos' : 'Adicionado aos favoritos!',
+      'success',
+    );
+  }, [onToggleFavorite, user, isFavorite, addToast]);
 
   const handleShare = useCallback(async () => {
     const url = user.html_url;
@@ -25,17 +32,17 @@ export const UserCard = memo(function UserCard({
       try {
         await navigator.share({ title: user.name ?? user.login, url });
       } catch {
-        // User cancelled or error
+        // User cancelled or error — no feedback needed
       }
     } else {
       try {
         await navigator.clipboard.writeText(url);
-        // Brief visual feedback handled by caller if needed
+        addToast('Link copiado!', 'success');
       } catch {
-        // Clipboard not available
+        addToast('Erro ao copiar link', 'error');
       }
     }
-  }, [user]);
+  }, [user, addToast]);
 
   return (
     <div className={`card shadow-sm ${styles.userCard}`}>

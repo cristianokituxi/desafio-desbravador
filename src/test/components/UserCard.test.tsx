@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { UserCard } from '../../components/UserCard/UserCard';
+import { ToastProvider } from '../../context/ToastContext';
 import type { GitHubUser } from '../../types';
 
 const mockUser: GitHubUser = {
@@ -17,21 +18,25 @@ const mockUser: GitHubUser = {
   public_repos: 8,
 };
 
+function renderWithToast(ui: React.ReactElement) {
+  return render(<ToastProvider>{ui}</ToastProvider>);
+}
+
 describe('UserCard', () => {
   it('renders user name and login', () => {
-    render(<UserCard user={mockUser} />);
+    renderWithToast(<UserCard user={mockUser} />);
 
     expect(screen.getByText('The Octocat')).toBeInTheDocument();
     expect(screen.getByText('@octocat')).toBeInTheDocument();
   });
 
   it('renders bio', () => {
-    render(<UserCard user={mockUser} />);
+    renderWithToast(<UserCard user={mockUser} />);
     expect(screen.getByText('GitHub mascot')).toBeInTheDocument();
   });
 
   it('renders company and location', () => {
-    render(<UserCard user={mockUser} />);
+    renderWithToast(<UserCard user={mockUser} />);
     expect(screen.getByText(/San Francisco/)).toBeInTheDocument();
     // Company "GitHub" is present, but also appears in bio and profile link
     const metaItems = screen.getAllByText(/GitHub/);
@@ -42,14 +47,14 @@ describe('UserCard', () => {
   });
 
   it('renders stats (followers, following, repos)', () => {
-    render(<UserCard user={mockUser} />);
+    renderWithToast(<UserCard user={mockUser} />);
     expect(screen.getByText('1.0k')).toBeInTheDocument(); // followers
     expect(screen.getByText('10')).toBeInTheDocument(); // following
     expect(screen.getByText('8')).toBeInTheDocument(); // public_repos
   });
 
   it('renders link to GitHub profile', () => {
-    render(<UserCard user={mockUser} />);
+    renderWithToast(<UserCard user={mockUser} />);
 
     const link = screen.getByRole('link', { name: /ver no github/i });
     expect(link).toHaveAttribute('href', 'https://github.com/octocat');
@@ -72,7 +77,7 @@ describe('UserCard', () => {
       public_repos: 0,
     };
 
-    render(<UserCard user={minimalUser} />);
+    renderWithToast(<UserCard user={minimalUser} />);
     expect(screen.getByText('@minimal')).toBeInTheDocument();
   });
 });

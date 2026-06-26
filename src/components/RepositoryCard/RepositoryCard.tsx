@@ -2,20 +2,26 @@ import { memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import type { GitHubRepository } from '../../types';
 import { formatNumber, formatDate } from '../../utils/formatters';
+import { useToast } from '../../context/ToastContext';
 import styles from './RepositoryCard.module.scss';
 
 interface RepositoryCardProps {
   repository: GitHubRepository;
 }
 
-export const RepositoryCard = memo(function RepositoryCard({ repository }: RepositoryCardProps) {
+export const RepositoryCard = memo(function RepositoryCard({
+  repository,
+}: RepositoryCardProps) {
+  const { addToast } = useToast();
+
   const handleCopyLink = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(repository.html_url);
+      addToast('Link copiado!', 'success');
     } catch {
-      // Clipboard not available
+      addToast('Erro ao copiar link', 'error');
     }
-  }, [repository.html_url]);
+  }, [repository.html_url, addToast]);
 
   return (
     <div className={`card shadow-sm ${styles.card}`}>

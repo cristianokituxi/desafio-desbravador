@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { RepositoryCard } from '../../components/RepositoryCard/RepositoryCard';
+import { ToastProvider } from '../../context/ToastContext';
 import type { GitHubRepository } from '../../types';
 
 const mockRepo: GitHubRepository = {
@@ -17,7 +18,11 @@ const mockRepo: GitHubRepository = {
 };
 
 function renderWithRouter(ui: React.ReactElement) {
-  return render(<MemoryRouter>{ui}</MemoryRouter>);
+  return render(
+    <MemoryRouter>
+      <ToastProvider>{ui}</ToastProvider>
+    </MemoryRouter>,
+  );
 }
 
 describe('RepositoryCard', () => {
