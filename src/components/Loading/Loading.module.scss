@@ -1,0 +1,52 @@
+.spinnerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  gap: 1rem;
+}
+
+.spinnerText {
+  color: var(--bs-secondary-color);
+  font-size: 0.95rem;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bs-tertiary-bg) 25%,
+    var(--bs-secondary-bg) 50%,
+    var(--bs-tertiary-bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeletonCard {
+  composes: skeleton;
+  height: 200px;
+}
+
+.skeletonAvatar {
+  composes: skeleton;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.skeletonLine {
+  composes: skeleton;
+  height: 16px;
+  margin-bottom: 0.5rem;
+}

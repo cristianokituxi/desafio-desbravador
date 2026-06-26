@@ -1,0 +1,163 @@
+import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import type { GitHubRepoDetails } from '../../types';
+import { fetchRepoDetails } from '../../api/github';
+import { formatNumber, formatDate } from '../../utils/formatters';
+import { Avatar } from '../../components/Avatar/Avatar';
+import { Loading } from '../../components/Loading/Loading';
+import styles from './RepositoryDetails.module.scss';
+
+export function RepositoryDetails() {
+  const { owner, repo } = useParams<{ owner: string; repo: string }>();
+  const [repoData, setRepoData] = useState<GitHubRepoDetails | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!owner || !repo) return;
+
+    let cancelled = false;
+
+    async function loadRepoDetails() {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const data = await fetchRepoDetails(owner!, repo!);
+        if (!cancelled) {
+          setRepoData(data);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          const message = err instanceof Error ? err.message : 'UNKNOWN_ERROR';
+          if (message === 'NOT_FOUND') {
+            setError('Repositório não encontrado.');
+          } else if (message.startsWith('RATE_LIMIT')) {
+            const resetIso = message.split('|')[1];
+            const resetDate = resetIso ? new Date(resetIso) : null;
+            const resetLabel = resetDate
+              ? `Volte às ${resetDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}.`
+              : 'Aguarde um momento.';
+            setError(`Limite de requisições da API excedido. ${resetLabel}`);
+          } else {
+            setError('Erro de conexão. Verifique sua internet e tente novamente.');
+          }
+        }
+      } finally {
+        if (!cancelled) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    loadRepoDetails();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [owner, repo]);
+
+  if (isLoading) {
+    return (
+      <div className={styles.page}>
+        <div className="container">
+          <Loading variant="skeleton-profile" />
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !repoData) {
+    return (
+      <div className={styles.page}>
+        <div className="container">
+          <div className={styles.errorState}>
+            <h2>😕 {error || 'Repositório não encontrado'}</h2>
+            <Link to="/" className="btn btn-primary mt-3">
+              Voltar ao início
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.page}>
+      <div className="container">
+        <Link to="/" className={`btn btn-outline-secondary btn-sm ${styles.backButton}`}>
+          ← Voltar
+        </Link>
+
+        <div className={`card shadow-sm ${styles.repoCard}`}>
+          <div className="d-flex align-items-start gap-3 mb-3">
+            <Avatar src={repoData.owner.avatar_url} alt={repoData.owner.login} size="small" />
+            <div>
+              <div className={styles.repoHeader}>
+                <h1 className={styles.repoName}>{repoData.name}</h1>
+              </div>
+              <p className={styles.repoOwner}>por @{repoData.owner.login}</p>
+            </div>
+          </div>
+
+          {repoData.description && <p className={styles.repoDescription}>{repoData.description}</p>}
+
+          <div className={styles.statsGrid}>
+            <div className={styles.statBox}>
+              <span className={styles.statValue}>⭐ {formatNumber(repoData.stargazers_count)}</span>
+              <span className={styles.statLabel}>Stars</span>
+            </div>
+            <div className={styles.statBox}>
+              <span className={styles.statValue}>🍴 {formatNumber(repoData.forks_count)}</span>
+              <span className={styles.statLabel}>Forks</span>
+            </div>
+            <div className={styles.statBox}>
+              <span className={styles.statValue}>👁️ {formatNumber(repoData.watchers_count)}</span>
+              <span className={styles.statLabel}>Watchers</span>
+            </div>
+            <div className={styles.statBox}>
+              <span className={styles.statValue}>
+                ❗ {formatNumber(repoData.open_issues_count)}
+              </span>
+              <span className={styles.statLabel}>Issues abertas</span>
+            </div>
+          </div>
+
+          <div className={styles.metaList}>
+            {repoData.language && (
+              <span className={styles.metaItem}>
+                Linguagem: <span className={styles.metaValue}>{repoData.language}</span>
+              </span>
+            )}
+            {repoData.license && (
+              <span className={styles.metaItem}>
+                Licença: <span className={styles.metaValue}>{repoData.license.name}</span>
+              </span>
+            )}
+            <span className={styles.metaItem}>
+              Criado: <span className={styles.metaValue}>{formatDate(repoData.created_at)}</span>
+            </span>
+            <span className={styles.metaItem}>
+              Atualizado:{' '}
+              <span className={styles.metaValue}>{formatDate(repoData.updated_at)}</span>
+            </span>
+          </div>
+
+          <div className={styles.actionButtons}>
+            <a
+              href={repoData.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
+              🔗 Abrir no GitHub
+            </a>
+            <Link to="/" className="btn btn-outline-secondary">
+              ← Voltar
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

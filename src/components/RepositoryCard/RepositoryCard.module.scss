@@ -1,0 +1,84 @@
+.card {
+  height: 100%;
+  border-radius: 12px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  animation: fadeInUp 0.4s ease both;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.repoName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--bs-primary);
+  word-break: break-word;
+}
+
+.repoDescription {
+  color: var(--bs-secondary-color);
+  font-size: 0.9rem;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.repoMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--bs-secondary-color);
+  margin-bottom: 0.75rem;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.languageBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  &::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--bs-primary);
+    display: inline-block;
+  }
+}
+
+.detailsButton {
+  margin-top: auto;
+}

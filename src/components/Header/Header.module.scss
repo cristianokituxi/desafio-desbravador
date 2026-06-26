@@ -1,0 +1,88 @@
+.header {
+  backdrop-filter: blur(10px);
+  background-color: var(--bs-body-bg);
+  border-bottom: 1px solid var(--bs-border-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.brand {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .brandIcon {
+    font-size: 1.6rem;
+  }
+}
+
+.rateLimitBadge {
+  display: flex;
+  align-items: center;
+  background: var(--bs-tertiary-bg);
+  border-radius: 100px;
+  padding: 2px 8px 2px 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  min-width: 48px;
+  height: 24px;
+  gap: 4px;
+}
+
+.rateLimitBar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--bs-success);
+  border-radius: 100px;
+  transition:
+    width 0.4s ease,
+    background-color 0.4s ease;
+  z-index: 0;
+}
+
+.rateLimitLow .rateLimitBar {
+  background: var(--bs-warning);
+}
+
+.rateLimitCritical .rateLimitBar {
+  background: var(--bs-danger);
+}
+
+.rateLimitText {
+  position: relative;
+  z-index: 1;
+  color: var(--bs-body-color);
+}
+
+.rateLimitMax {
+  opacity: 0.5;
+  font-weight: 400;
+}
+
+.themeToggle {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+
+  &:hover {
+    background-color: var(--bs-tertiary-bg);
+  }
+}

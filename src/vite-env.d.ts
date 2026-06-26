@@ -1,0 +1,24 @@
+/// <reference types="vite/client" />
+
+interface ImportMetaEnv {
+  readonly VITE_GITHUB_TOKEN?: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
+declare module '*.module.scss' {
+  const classes: { readonly [key: string]: string };
+  export default classes;
+}
+
+declare module '*.module.css' {
+  const classes: { readonly [key: string]: string };
+  export default classes;
+}
+
+declare module '*.scss' {
+  const content: string;
+  export default content;
+}
