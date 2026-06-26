@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import { Loading } from '../components/Loading/Loading';
 import { ErrorBoundary } from '../components/ErrorBoundary/ErrorBoundary';
 import { Layout } from '../components/Layout/Layout';
@@ -18,7 +18,7 @@ function SuspenseWrapper({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<Loading text="Carregando página..." />}>{children}</Suspense>;
 }
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     element: <Layout />,
     children: [
