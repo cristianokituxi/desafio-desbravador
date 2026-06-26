@@ -1,10 +1,12 @@
-export enum GitHubErrorCode {
-  NOT_FOUND = 'NOT_FOUND',
-  RATE_LIMIT = 'RATE_LIMIT',
-  FORBIDDEN = 'FORBIDDEN',
-  TIMEOUT = 'TIMEOUT',
-  NETWORK = 'NETWORK',
-}
+export const GitHubErrorCode = {
+  NOT_FOUND: 'NOT_FOUND',
+  RATE_LIMIT: 'RATE_LIMIT',
+  FORBIDDEN: 'FORBIDDEN',
+  TIMEOUT: 'TIMEOUT',
+  NETWORK: 'NETWORK',
+} as const;
+
+export type GitHubErrorCode = (typeof GitHubErrorCode)[keyof typeof GitHubErrorCode];
 
 export interface GitHubError {
   code: GitHubErrorCode;
