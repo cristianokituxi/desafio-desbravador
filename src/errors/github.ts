@@ -1,4 +1,4 @@
-export const enum GitHubErrorCode {
+export enum GitHubErrorCode {
   NOT_FOUND = 'NOT_FOUND',
   RATE_LIMIT = 'RATE_LIMIT',
   FORBIDDEN = 'FORBIDDEN',

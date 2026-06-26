@@ -26,7 +26,7 @@ export function Home() {
   const [lastUser, setLastUser] = useLocalStorage<string>(LAST_SEARCHED_USER_KEY, '');
   const [searchQuery, setSearchQuery] = useState('');
   const [languageFilter, setLanguageFilter] = useState<string>('');
-  const debounceTimerRef = useRef<ReturnType<typeof setTimeout>>();
+  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Cleanup timer on unmount
   useEffect(() => {

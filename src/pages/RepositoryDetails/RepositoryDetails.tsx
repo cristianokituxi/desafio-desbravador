@@ -18,6 +18,9 @@ export function RepositoryDetails() {
   useEffect(() => {
     if (!owner || !repo) return;
 
+    const ownerName = owner;
+    const repoName = repo;
+
     let cancelled = false;
 
     async function loadRepoDetails() {
@@ -25,7 +28,7 @@ export function RepositoryDetails() {
       setError(null);
 
       try {
-        const data = await fetchRepoDetails(owner, repo);
+        const data = await fetchRepoDetails(ownerName, repoName);
         if (!cancelled) {
           setRepoData(data);
         }
