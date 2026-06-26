@@ -45,7 +45,9 @@ export function Header() {
       <div className="container">
         <div className="d-flex align-items-center justify-content-between py-3">
           <Link to="/" className={styles.brand}>
-            <span className={styles.brandIcon}>🐙</span>
+            <span className={styles.brandIcon} aria-hidden="true">
+              🐙
+            </span>
             <span className="d-none d-sm-inline">GitHub Explorer</span>
           </Link>
 
@@ -55,9 +57,10 @@ export function Header() {
               className={styles.themeToggle}
               onClick={toggleTheme}
               aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
+              aria-pressed={isDark}
               title={isDark ? 'Modo claro' : 'Modo escuro'}
             >
-              {isDark ? '☀️' : '🌙'}
+              <span aria-hidden="true">{isDark ? '☀️' : '🌙'}</span>
             </button>
           </div>
         </div>

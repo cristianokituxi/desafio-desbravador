@@ -100,21 +100,29 @@ export function RepositoryDetails() {
             <div className={styles.statsGrid}>
               <div className={styles.statBox}>
                 <span className={styles.statValue}>
-                  ⭐ {formatNumber(repoData.stargazers_count)}
+                  <span aria-hidden="true">⭐ </span>
+                  {formatNumber(repoData.stargazers_count)}
                 </span>
                 <span className={styles.statLabel}>Stars</span>
               </div>
               <div className={styles.statBox}>
-                <span className={styles.statValue}>🍴 {formatNumber(repoData.forks_count)}</span>
+                <span className={styles.statValue}>
+                  <span aria-hidden="true">🍴 </span>
+                  {formatNumber(repoData.forks_count)}
+                </span>
                 <span className={styles.statLabel}>Forks</span>
               </div>
               <div className={styles.statBox}>
-                <span className={styles.statValue}>👁️ {formatNumber(repoData.watchers_count)}</span>
+                <span className={styles.statValue}>
+                  <span aria-hidden="true">👁️ </span>
+                  {formatNumber(repoData.watchers_count)}
+                </span>
                 <span className={styles.statLabel}>Watchers</span>
               </div>
               <div className={styles.statBox}>
                 <span className={styles.statValue}>
-                  ❗ {formatNumber(repoData.open_issues_count)}
+                  <span aria-hidden="true">❗ </span>
+                  {formatNumber(repoData.open_issues_count)}
                 </span>
                 <span className={styles.statLabel}>Issues abertas</span>
               </div>
@@ -147,10 +155,10 @@ export function RepositoryDetails() {
                 rel="noopener noreferrer"
                 className="btn btn-primary"
               >
-                🔗 Abrir no GitHub
+                <span aria-hidden="true">🔗 </span>Abrir no GitHub
               </a>
               <Link to="/" className="btn btn-outline-secondary">
-                ← Voltar
+                <span aria-hidden="true">← </span>Voltar
               </Link>
             </div>
           </div>

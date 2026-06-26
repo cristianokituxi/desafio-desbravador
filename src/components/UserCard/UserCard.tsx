@@ -49,23 +49,39 @@ export const UserCard = memo(function UserCard({
           {user.bio && <p className={styles.userBio}>{user.bio}</p>}
 
           <div className={styles.userMeta}>
-            {user.company && <span className={styles.metaItem}>🏢 {user.company}</span>}
-            {user.location && <span className={styles.metaItem}>📍 {user.location}</span>}
+            {user.company && (
+              <span className={styles.metaItem}>
+                <span aria-hidden="true">🏢 </span>
+                {user.company}
+              </span>
+            )}
+            {user.location && (
+              <span className={styles.metaItem}>
+                <span aria-hidden="true">📍 </span>
+                {user.location}
+              </span>
+            )}
           </div>
 
           <div className={styles.statsList}>
             <span className={styles.statItem}>
-              <span className={styles.statIcon}>👥</span>
+              <span className={styles.statIcon} aria-hidden="true">
+                👥
+              </span>
               <span className={styles.statValue}>{formatNumber(user.followers)}</span>
               seguidores
             </span>
             <span className={styles.statItem}>
-              <span className={styles.statIcon}>👤</span>
+              <span className={styles.statIcon} aria-hidden="true">
+                👤
+              </span>
               <span className={styles.statValue}>{formatNumber(user.following)}</span>
               seguindo
             </span>
             <span className={styles.statItem}>
-              <span className={styles.statIcon}>📦</span>
+              <span className={styles.statIcon} aria-hidden="true">
+                📦
+              </span>
               <span className={styles.statValue}>{formatNumber(user.public_repos)}</span>
               repositórios
             </span>
@@ -78,7 +94,7 @@ export const UserCard = memo(function UserCard({
               rel="noopener noreferrer"
               className={`btn btn-outline-primary btn-sm ${styles.profileLink}`}
             >
-              🔗 Ver no GitHub
+              <span aria-hidden="true">🔗 </span>Ver no GitHub
             </a>
 
             <button

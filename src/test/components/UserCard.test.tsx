@@ -32,8 +32,13 @@ describe('UserCard', () => {
 
   it('renders company and location', () => {
     render(<UserCard user={mockUser} />);
-    expect(screen.getByText('🏢 GitHub')).toBeInTheDocument();
-    expect(screen.getByText('📍 San Francisco')).toBeInTheDocument();
+    expect(screen.getByText(/San Francisco/)).toBeInTheDocument();
+    // Company "GitHub" is present, but also appears in bio and profile link
+    const metaItems = screen.getAllByText(/GitHub/);
+    const companyElement = metaItems.find(
+      (el) => el.tagName === 'SPAN' && el.textContent?.includes('🏢'),
+    );
+    expect(companyElement).toBeInTheDocument();
   });
 
   it('renders stats (followers, following, repos)', () => {

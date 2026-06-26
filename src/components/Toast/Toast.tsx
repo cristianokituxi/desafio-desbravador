@@ -16,13 +16,13 @@ export function ToastContainer() {
           role="alert"
         >
           <span>
-            {toast.type === 'success' && '✅ '}
-            {toast.type === 'error' && '❌ '}
-            {toast.type === 'info' && 'ℹ️ '}
+            {toast.type === 'success' && <span aria-hidden="true">✅ </span>}
+            {toast.type === 'error' && <span aria-hidden="true">❌ </span>}
+            {toast.type === 'info' && <span aria-hidden="true">ℹ️ </span>}
             {toast.text}
           </span>
           <button className={styles.closeButton} aria-label="Fechar">
-            ✕
+            <span aria-hidden="true">✕</span>
           </button>
         </div>
       ))}

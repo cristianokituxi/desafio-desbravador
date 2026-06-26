@@ -57,7 +57,7 @@ export function SearchBar({
             </>
           ) : (
             <>
-              <span>🔍</span>
+              <span aria-hidden="true">🔍</span>
               <span>Buscar</span>
             </>
           )}

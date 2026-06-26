@@ -32,9 +32,18 @@ export const RepositoryCard = memo(function RepositoryCard({ repository }: Repos
               {repository.language}
             </span>
           )}
-          <span className={styles.metaItem}>⭐ {formatNumber(repository.stargazers_count)}</span>
-          <span className={styles.metaItem}>🍴 {formatNumber(repository.forks_count)}</span>
-          <span className={styles.metaItem}>📅 {formatDate(repository.updated_at)}</span>
+          <span className={styles.metaItem}>
+            <span aria-hidden="true">⭐ </span>
+            {formatNumber(repository.stargazers_count)}
+          </span>
+          <span className={styles.metaItem}>
+            <span aria-hidden="true">🍴 </span>
+            {formatNumber(repository.forks_count)}
+          </span>
+          <span className={styles.metaItem}>
+            <span aria-hidden="true">📅 </span>
+            {formatDate(repository.updated_at)}
+          </span>
         </div>
 
         <div className={styles.actionRow}>
@@ -50,7 +59,7 @@ export const RepositoryCard = memo(function RepositoryCard({ repository }: Repos
             aria-label="Copiar link do repositório"
             title="Copiar link do repositório"
           >
-            📋
+            <span aria-hidden="true">📋</span>
           </button>
         </div>
       </div>

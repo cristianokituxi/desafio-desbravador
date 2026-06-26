@@ -140,7 +140,9 @@ export function Home() {
       {/* Error State */}
       {error && (
         <div className={styles.errorState}>
-          <div className={styles.errorIcon}>⚠️</div>
+          <div className={styles.errorIcon} aria-hidden="true">
+            ⚠️
+          </div>
           <h3>Ops! Algo deu errado</h3>
           <p className="text-muted">{error}</p>
         </div>
@@ -149,7 +151,9 @@ export function Home() {
       {/* Not Found State */}
       {notFound && (
         <div className={styles.notFoundState}>
-          <div className={styles.notFoundIcon}>🔍</div>
+          <div className={styles.notFoundIcon} aria-hidden="true">
+            🔍
+          </div>
           <h3>Usuário não encontrado</h3>
           <p className="text-muted">Verifique o nome de usuário e tente novamente.</p>
         </div>
@@ -175,7 +179,7 @@ export function Home() {
 
             <div className={styles.reposHeader}>
               <h2 className={styles.reposTitle}>
-                📦 Repositórios ({filteredRepos.length}
+                <span aria-hidden="true">📦 </span>Repositórios ({filteredRepos.length}
                 {filteredRepos.length !== repositories.length && ` de ${repositories.length}`})
               </h2>
 
@@ -228,7 +232,13 @@ export function Home() {
               <Loading variant="skeleton-card" />
             ) : repositories.length === 0 || filteredRepos.length === 0 ? (
               <div className={styles.emptyState}>
-                <div className={styles.emptyIcon}>{repositories.length === 0 ? '📭' : '🔎'}</div>
+                <div className={styles.emptyIcon}>
+                  {repositories.length === 0 ? (
+                    <span aria-hidden="true">📭</span>
+                  ) : (
+                    <span aria-hidden="true">🔎</span>
+                  )}
+                </div>
                 <h3>{repositories.length === 0 ? 'Sem repositórios' : 'Nenhum resultado'}</h3>
                 <p className="text-muted">
                   {repositories.length === 0
@@ -274,7 +284,9 @@ export function Home() {
 
           {favorites.length > 0 && (
             <div className={styles.favoritesSection}>
-              <h3 className={styles.favoritesTitle}>⭐ Usuários favoritos ({favorites.length})</h3>
+              <h3 className={styles.favoritesTitle}>
+                <span aria-hidden="true">⭐ </span>Usuários favoritos ({favorites.length})
+              </h3>
               <div className={styles.favoritesGrid}>
                 {favorites.map((fav) => (
                   <button
