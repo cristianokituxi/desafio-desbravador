@@ -17,7 +17,6 @@
   <a href="#-testes">Testes</a> •
   <a href="#-princípios-de-engenharia">Princípios</a> •
   <a href="#-deploy">Deploy</a> •
-  <a href="#-contribuição">Contribuição</a>
 </p>
 
 <p align="center">
@@ -77,7 +76,6 @@
 - [Deploy](#-deploy)
 - [Estrutura do Projeto](#-estrutura-do-projeto)
 - [Roadmap](#-roadmap)
-- [Contribuição](#-contribuição)
 - [Por que este projeto se destaca?](#-por-que-este-projeto-se-destaca)
 - [Sobre este projeto](#-sobre-este-projeto)
 - [Licença](#-licença)
@@ -1119,51 +1117,6 @@ github-explorer/
 - [ ] **Internacionalização (i18n)** com suporte a múltiplos idiomas
 - [ ] **TurboPack** ou **Rspack** como bundler alternativo
 - [ ] **Storybook** para documentação de componentes
-
----
-
-## 🤝 Contribuição
-
-Contribuições são bem-vindas! Siga o fluxo:
-
-### Fluxo Git
-
-```bash
-# 1. Fork do projeto
-# 2. Clone seu fork
-git clone https://github.com/seu-usuario/github-explorer.git
-cd github-explorer
-
-# 3. Crie uma branch com o tipo correto
-git checkout -b feat/minha-feature    # nova funcionalidade
-git checkout -b fix/corrige-bug       # correção de bug
-git checkout -b refactor/limpeza      # refatoração
-git checkout -b docs/melhoria-readme  # documentação
-
-# 4. Faça commits seguindo Conventional Commits
-git commit -m "feat: add user contribution graph"
-git commit -m "fix: correct date formatting"
-git commit -m "docs: update architecture section"
-
-# 5. Push e abra um Pull Request
-git push origin feat/minha-feature
-```
-
-### Conventional Commits
-
-| Prefixo     | Uso                                 | Exemplo                                  |
-| ----------- | ----------------------------------- | ---------------------------------------- |
-| `feat:`     | Nova funcionalidade                 | `feat: add pull request list`            |
-| `fix:`      | Correção de bug                     | `fix: handle empty repositories list`    |
-| `refactor:` | Refatoração sem mudar comportamento | `refactor: extract search logic to hook` |
-| `perf:`     | Melhoria de performance             | `perf: add React.memo to UserCard`       |
-| `test:`     | Adição ou modificação de testes     | `test: add pagination edge cases`        |
-| `docs:`     | Documentação                        | `docs: update README with architecture`  |
-| `chore:`    | Tarefas de manutenção               | `chore: update dependencies`             |
-| `style:`    | Formatação, linting                 | `style: run prettier`                    |
-| `ci:`       | CI/CD                               | `ci: add GitHub Actions workflow`        |
-
-> O CI executará automaticamente type-check, lint e testes no seu PR.
 
 ---
 
