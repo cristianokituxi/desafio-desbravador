@@ -90,7 +90,7 @@
   <img src="screenshots/home.png" alt="Tela principal do GitHub Explorer" width="800" />
 </p>
 
-> **🔗 Links:** [Repositório](https://github.com/username/github-explorer) · [Demo ao vivo](https://github-explorer.vercel.app)
+> **🔗 Links:** [Repositório](https://github.com/cristianokituxi/desafio-desbravador) · [Demo ao vivo](https://cristianokituxi.github.io/desafio-desbravador/)
 
 ---
 
