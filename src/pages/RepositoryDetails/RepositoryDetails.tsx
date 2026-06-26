@@ -5,6 +5,7 @@ import { fetchRepoDetails } from '../../api/github';
 import { formatNumber, formatDate } from '../../utils/formatters';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { Loading } from '../../components/Loading/Loading';
+import { parseGitHubError, getErrorMessage } from '../../errors/github';
 import styles from './RepositoryDetails.module.scss';
 
 export function RepositoryDetails() {
@@ -23,25 +24,13 @@ export function RepositoryDetails() {
       setError(null);
 
       try {
-        const data = await fetchRepoDetails(owner!, repo!);
+        const data = await fetchRepoDetails(owner, repo);
         if (!cancelled) {
           setRepoData(data);
         }
       } catch (err) {
         if (!cancelled) {
-          const message = err instanceof Error ? err.message : 'UNKNOWN_ERROR';
-          if (message === 'NOT_FOUND') {
-            setError('Repositório não encontrado.');
-          } else if (message.startsWith('RATE_LIMIT')) {
-            const resetIso = message.split('|')[1];
-            const resetDate = resetIso ? new Date(resetIso) : null;
-            const resetLabel = resetDate
-              ? `Volte às ${resetDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}.`
-              : 'Aguarde um momento.';
-            setError(`Limite de requisições da API excedido. ${resetLabel}`);
-          } else {
-            setError('Erro de conexão. Verifique sua internet e tente novamente.');
-          }
+          setError(getErrorMessage(parseGitHubError(err)));
         }
       } finally {
         if (!cancelled) {
