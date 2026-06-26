@@ -79,6 +79,19 @@
   }
 }
 
-.detailsButton {
+.actionRow {
+  display: flex;
+  gap: 0.5rem;
   margin-top: auto;
+  align-items: center;
+}
+
+.detailsButton {
+}
+
+.copyBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
 }

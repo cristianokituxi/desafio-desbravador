@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import type { SortOption } from '../../types';
 import { useGithub } from '../../hooks/useGithub';
+import { useFavorites } from '../../hooks/useFavorites';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { sortRepositories } from '../../utils/formatters';
 import { SORT_OPTIONS, LAST_SEARCHED_USER_KEY } from '../../utils/constants';
@@ -19,6 +20,7 @@ const DEBOUNCE_DELAY = 500;
 export function Home() {
   const { user, repositories, isLoadingUser, isLoadingRepos, error, notFound, searchUser } =
     useGithub();
+  const { favorites, isFavorite, toggleFavorite } = useFavorites();
   const [sortBy, setSortBy] = useState<SortOption>('stars_desc');
   const [currentPage, setCurrentPage] = useState(1);
   const [lastUser, setLastUser] = useLocalStorage<string>(LAST_SEARCHED_USER_KEY, '');
@@ -162,7 +164,11 @@ export function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
             >
-              <UserCard user={user} />
+              <UserCard
+                user={user}
+                isFavorite={isFavorite(user.login)}
+                onToggleFavorite={toggleFavorite}
+              />
             </motion.div>
 
             <UserStats repositories={repositories} />
@@ -265,6 +271,25 @@ export function Home() {
           <p className={styles.initialText}>
             Pesquise por um usuário do GitHub para começar a explorar!
           </p>
+
+          {favorites.length > 0 && (
+            <div className={styles.favoritesSection}>
+              <h3 className={styles.favoritesTitle}>⭐ Usuários favoritos ({favorites.length})</h3>
+              <div className={styles.favoritesGrid}>
+                {favorites.map((fav) => (
+                  <button
+                    key={fav.login}
+                    className={styles.favoriteChip}
+                    onClick={() => handleSearch(fav.login)}
+                    title={`Buscar @${fav.login}`}
+                  >
+                    <img src={fav.avatar_url} alt="" className={styles.favoriteAvatar} />
+                    <span>@{fav.login}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import type { GitHubRepository } from '../../types';
 import { formatNumber, formatDate } from '../../utils/formatters';
@@ -9,6 +9,14 @@ interface RepositoryCardProps {
 }
 
 export const RepositoryCard = memo(function RepositoryCard({ repository }: RepositoryCardProps) {
+  const handleCopyLink = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(repository.html_url);
+    } catch {
+      // Clipboard not available
+    }
+  }, [repository.html_url]);
+
   return (
     <div className={`card shadow-sm ${styles.card}`}>
       <div className={`card-body ${styles.cardBody}`}>
@@ -29,12 +37,22 @@ export const RepositoryCard = memo(function RepositoryCard({ repository }: Repos
           <span className={styles.metaItem}>📅 {formatDate(repository.updated_at)}</span>
         </div>
 
-        <Link
-          to={`/repository/${repository.owner.login}/${repository.name}`}
-          className={`btn btn-outline-primary btn-sm ${styles.detailsButton}`}
-        >
-          Ver detalhes
-        </Link>
+        <div className={styles.actionRow}>
+          <Link
+            to={`/repository/${repository.owner.login}/${repository.name}`}
+            className={`btn btn-outline-primary btn-sm ${styles.detailsButton}`}
+          >
+            Ver detalhes
+          </Link>
+          <button
+            className={`btn btn-outline-secondary btn-sm ${styles.copyBtn}`}
+            onClick={handleCopyLink}
+            aria-label="Copiar link do repositório"
+            title="Copiar link do repositório"
+          >
+            📋
+          </button>
+        </div>
       </div>
     </div>
   );
