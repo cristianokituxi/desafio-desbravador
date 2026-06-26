@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { GitHubUser } from '../../types';
 import { formatNumber } from '../../utils/formatters';
 import { Avatar } from '../Avatar/Avatar';
@@ -7,7 +8,7 @@ interface UserCardProps {
   user: GitHubUser;
 }
 
-export function UserCard({ user }: UserCardProps) {
+export const UserCard = memo(function UserCard({ user }: UserCardProps) {
   return (
     <div className={`card shadow-sm ${styles.userCard}`}>
       <div className="d-flex flex-column flex-md-row align-items-center align-items-md-start gap-4">
@@ -54,4 +55,4 @@ export function UserCard({ user }: UserCardProps) {
       </div>
     </div>
   );
-}
+});

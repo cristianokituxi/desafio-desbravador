@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import type { GitHubRepository } from '../../types';
 import { formatNumber, formatDate } from '../../utils/formatters';
@@ -8,7 +9,10 @@ interface RepositoryCardProps {
   index: number;
 }
 
-export function RepositoryCard({ repository, index }: RepositoryCardProps) {
+export const RepositoryCard = memo(function RepositoryCard({
+  repository,
+  index,
+}: RepositoryCardProps) {
   return (
     <div className="col-12 col-md-6 col-lg-4">
       <div
@@ -43,4 +47,4 @@ export function RepositoryCard({ repository, index }: RepositoryCardProps) {
       </div>
     </div>
   );
-}
+});
