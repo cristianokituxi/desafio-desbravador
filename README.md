@@ -1119,26 +1119,6 @@ github-explorer/
 - [ ] **Storybook** para documentação de componentes
 
 ---
-
-## 🏆 Por que este projeto se destaca?
-
-### Para Recrutadores e Avaliadores Técnicos
-
-| Diferencial                    | Evidência                                                                                    |
-| ------------------------------ | -------------------------------------------------------------------------------------------- |
-| **TypeScript estrito**         | Zero `any`, tipagem completa em todas as camadas                                             |
-| **Arquitetura em camadas**     | API → Services → Hooks → Components → Pages com responsabilidades claras                     |
-| **Testes abrangentes**         | 59 testes em 8 suites (hooks, componentes, utils, services)                                  |
-| **Pipeline profissional**      | CI/CD com GitHub Actions + Husky + lint-staged + Conventional Commits                        |
-| **Tratamento de erros tipado** | `GitHubErrorCode` enum elimina strings mágicas                                               |
-| **Performance**                | Lazy loading, code splitting, React.memo, useMemo, debounce                                  |
-| **Acessibilidade**             | WCAG 2.1 — 10 técnicas de acessibilidade implementadas                                       |
-| **UX polida**                  | 3 variantes de skeleton, animações Framer Motion, 5 estados de UI                            |
-| **Segurança**                  | Token via env vars, rate limit com feedback visual, interceptors                             |
-| **Documentação**               | README completo, arquitetura explicada, decisões justificadas, princípios SOLID documentados |
-
----
-
 ## 💼 Sobre este projeto
 
 Este projeto foi desenvolvido como demonstração de domínio técnico em engenharia de software Front-End. Cada decisão — da arquitetura de pastas ao tratamento de rate limit — foi tomada com intencionalidade.
