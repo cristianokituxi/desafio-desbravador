@@ -44,6 +44,24 @@
   margin: 0;
 }
 
+.filterControls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filterInput {
+  width: 180px;
+  border-radius: 8px;
+}
+
+.filterSelect {
+  width: auto;
+  min-width: 150px;
+  border-radius: 8px;
+}
+
 .sortSelect {
   width: auto;
   min-width: 180px;
