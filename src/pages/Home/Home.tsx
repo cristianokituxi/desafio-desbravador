@@ -1,4 +1,5 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import type { SortOption } from '../../types';
 import { useGithub } from '../../hooks/useGithub';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -117,7 +118,13 @@ export function Home() {
       {user && !error && (
         <div className={styles.resultsSection}>
           <div className="container">
-            <UserCard user={user} />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <UserCard user={user} />
+            </motion.div>
 
             <div className={styles.reposHeader}>
               <h2 className={styles.reposTitle}>📦 Repositórios ({repositories.length})</h2>
@@ -147,7 +154,15 @@ export function Home() {
               <>
                 <div className="row g-4">
                   {paginatedRepos.map((repo, index) => (
-                    <RepositoryCard key={repo.id} repository={repo} index={index} />
+                    <motion.div
+                      key={repo.id}
+                      className="col-12 col-md-6 col-lg-4"
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                    >
+                      <RepositoryCard repository={repo} index={index} />
+                    </motion.div>
                   ))}
                 </div>
                 <Pagination

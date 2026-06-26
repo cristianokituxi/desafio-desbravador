@@ -50,3 +50,10 @@
   height: 16px;
   margin-bottom: 0.5rem;
 }
+
+.skeletonStatBox {
+  composes: skeleton;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  min-height: 64px;
+}

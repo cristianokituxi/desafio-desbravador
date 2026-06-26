@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import type { GitHubRepoDetails } from '../../types';
 import { fetchRepoDetails } from '../../api/github';
 import { formatNumber, formatDate } from '../../utils/formatters';
@@ -49,9 +50,7 @@ export function RepositoryDetails() {
   if (isLoading) {
     return (
       <div className={styles.page}>
-        <div className="container">
-          <Loading variant="skeleton-profile" />
-        </div>
+        <Loading variant="skeleton-details" />
       </div>
     );
   }
@@ -78,74 +77,84 @@ export function RepositoryDetails() {
           ← Voltar
         </Link>
 
-        <div className={`card shadow-sm ${styles.repoCard}`}>
-          <div className="d-flex align-items-start gap-3 mb-3">
-            <Avatar src={repoData.owner.avatar_url} alt={repoData.owner.login} size="small" />
-            <div>
-              <div className={styles.repoHeader}>
-                <h1 className={styles.repoName}>{repoData.name}</h1>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className={`card shadow-sm ${styles.repoCard}`}>
+            <div className="d-flex align-items-start gap-3 mb-3">
+              <Avatar src={repoData.owner.avatar_url} alt={repoData.owner.login} size="small" />
+              <div>
+                <div className={styles.repoHeader}>
+                  <h1 className={styles.repoName}>{repoData.name}</h1>
+                </div>
+                <p className={styles.repoOwner}>por @{repoData.owner.login}</p>
               </div>
-              <p className={styles.repoOwner}>por @{repoData.owner.login}</p>
             </div>
-          </div>
 
-          {repoData.description && <p className={styles.repoDescription}>{repoData.description}</p>}
-
-          <div className={styles.statsGrid}>
-            <div className={styles.statBox}>
-              <span className={styles.statValue}>⭐ {formatNumber(repoData.stargazers_count)}</span>
-              <span className={styles.statLabel}>Stars</span>
-            </div>
-            <div className={styles.statBox}>
-              <span className={styles.statValue}>🍴 {formatNumber(repoData.forks_count)}</span>
-              <span className={styles.statLabel}>Forks</span>
-            </div>
-            <div className={styles.statBox}>
-              <span className={styles.statValue}>👁️ {formatNumber(repoData.watchers_count)}</span>
-              <span className={styles.statLabel}>Watchers</span>
-            </div>
-            <div className={styles.statBox}>
-              <span className={styles.statValue}>
-                ❗ {formatNumber(repoData.open_issues_count)}
-              </span>
-              <span className={styles.statLabel}>Issues abertas</span>
-            </div>
-          </div>
-
-          <div className={styles.metaList}>
-            {repoData.language && (
-              <span className={styles.metaItem}>
-                Linguagem: <span className={styles.metaValue}>{repoData.language}</span>
-              </span>
+            {repoData.description && (
+              <p className={styles.repoDescription}>{repoData.description}</p>
             )}
-            {repoData.license && (
-              <span className={styles.metaItem}>
-                Licença: <span className={styles.metaValue}>{repoData.license.name}</span>
-              </span>
-            )}
-            <span className={styles.metaItem}>
-              Criado: <span className={styles.metaValue}>{formatDate(repoData.created_at)}</span>
-            </span>
-            <span className={styles.metaItem}>
-              Atualizado:{' '}
-              <span className={styles.metaValue}>{formatDate(repoData.updated_at)}</span>
-            </span>
-          </div>
 
-          <div className={styles.actionButtons}>
-            <a
-              href={repoData.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-            >
-              🔗 Abrir no GitHub
-            </a>
-            <Link to="/" className="btn btn-outline-secondary">
-              ← Voltar
-            </Link>
+            <div className={styles.statsGrid}>
+              <div className={styles.statBox}>
+                <span className={styles.statValue}>
+                  ⭐ {formatNumber(repoData.stargazers_count)}
+                </span>
+                <span className={styles.statLabel}>Stars</span>
+              </div>
+              <div className={styles.statBox}>
+                <span className={styles.statValue}>🍴 {formatNumber(repoData.forks_count)}</span>
+                <span className={styles.statLabel}>Forks</span>
+              </div>
+              <div className={styles.statBox}>
+                <span className={styles.statValue}>👁️ {formatNumber(repoData.watchers_count)}</span>
+                <span className={styles.statLabel}>Watchers</span>
+              </div>
+              <div className={styles.statBox}>
+                <span className={styles.statValue}>
+                  ❗ {formatNumber(repoData.open_issues_count)}
+                </span>
+                <span className={styles.statLabel}>Issues abertas</span>
+              </div>
+            </div>
+
+            <div className={styles.metaList}>
+              {repoData.language && (
+                <span className={styles.metaItem}>
+                  Linguagem: <span className={styles.metaValue}>{repoData.language}</span>
+                </span>
+              )}
+              {repoData.license && (
+                <span className={styles.metaItem}>
+                  Licença: <span className={styles.metaValue}>{repoData.license.name}</span>
+                </span>
+              )}
+              <span className={styles.metaItem}>
+                Criado: <span className={styles.metaValue}>{formatDate(repoData.created_at)}</span>
+              </span>
+              <span className={styles.metaItem}>
+                Atualizado:{' '}
+                <span className={styles.metaValue}>{formatDate(repoData.updated_at)}</span>
+              </span>
+            </div>
+
+            <div className={styles.actionButtons}>
+              <a
+                href={repoData.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                🔗 Abrir no GitHub
+              </a>
+              <Link to="/" className="btn btn-outline-secondary">
+                ← Voltar
+              </Link>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

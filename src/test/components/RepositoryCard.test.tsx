@@ -22,33 +22,33 @@ function renderWithRouter(ui: React.ReactElement) {
 
 describe('RepositoryCard', () => {
   it('renders repository name', () => {
-    renderWithRouter(<RepositoryCard repository={mockRepo} index={0} />);
+    renderWithRouter(<RepositoryCard repository={mockRepo} />);
     expect(screen.getByText('hello-world')).toBeInTheDocument();
   });
 
   it('renders description', () => {
-    renderWithRouter(<RepositoryCard repository={mockRepo} index={0} />);
+    renderWithRouter(<RepositoryCard repository={mockRepo} />);
     expect(screen.getByText('My first repository')).toBeInTheDocument();
   });
 
   it('renders language badge', () => {
-    renderWithRouter(<RepositoryCard repository={mockRepo} index={0} />);
+    renderWithRouter(<RepositoryCard repository={mockRepo} />);
     expect(screen.getByText('TypeScript')).toBeInTheDocument();
   });
 
   it('renders stars and forks count', () => {
-    renderWithRouter(<RepositoryCard repository={mockRepo} index={0} />);
+    renderWithRouter(<RepositoryCard repository={mockRepo} />);
     expect(screen.getByText(/42/)).toBeInTheDocument();
     expect(screen.getByText(/7/)).toBeInTheDocument();
   });
 
   it('renders formatted date', () => {
-    renderWithRouter(<RepositoryCard repository={mockRepo} index={0} />);
+    renderWithRouter(<RepositoryCard repository={mockRepo} />);
     expect(screen.getByText(/15\/03\/2024/)).toBeInTheDocument();
   });
 
   it('renders link to repository details', () => {
-    renderWithRouter(<RepositoryCard repository={mockRepo} index={0} />);
+    renderWithRouter(<RepositoryCard repository={mockRepo} />);
 
     const link = screen.getByRole('link', { name: /ver detalhes/i });
     expect(link).toHaveAttribute('href', '/repository/octocat/hello-world');
@@ -67,7 +67,7 @@ describe('RepositoryCard', () => {
       owner: { login: 'user' },
     };
 
-    renderWithRouter(<RepositoryCard repository={minimalRepo} index={0} />);
+    renderWithRouter(<RepositoryCard repository={minimalRepo} />);
     expect(screen.getByText('minimal')).toBeInTheDocument();
   });
 });
